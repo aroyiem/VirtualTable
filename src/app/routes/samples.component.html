@@ -1,0 +1,29 @@
+<style>
+  ::ng-deep virtual-scroll.selfScroll {
+    border: 1px solid rgb(209, 218, 223);
+  }
+  ::ng-deep virtual-scroll.selfScroll.vertical {
+    height: 75vh;
+  }
+
+  ::ng-deep virtual-scroll.selfScroll.horizontal {
+    width: 60vw;
+    height: 120px;
+  }
+</style>
+
+<div class="posts" id="samples">
+  <h1 class="content-subhead">Samples</h1>
+  <section class="post">
+    <header class="post-header">
+      <h2 class="post-title"><span>Live</span> Samples</h2>
+    </header>
+    <div class="post-description">
+      
+
+      <h2>Loading in <span>Chunks</span></h2>
+      <list-with-api [items]="items"></list-with-api>
+      
+    </div>
+  </section>
+</div>
