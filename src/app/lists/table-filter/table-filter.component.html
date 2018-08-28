@@ -1,0 +1,32 @@
+<div id="pagemargin" ng-controller="vsScrollbarCtrl2">
+
+  <h5>Example 2. Items as an object array</h5>
+
+  
+
+  <div id="filter">
+    <input type="text" placeholder="Filter value from all properties..." 
+    [(ngModel)]="filterText" >
+  </div>
+
+  <vsscrollbar items="allItems" items-in-page="5" height="129" ng-model="responseData">
+    <div id="item" ng-repeat="item in visibleItems track by $index" ng-click="itemClicked($index, item);">
+      <div id="itemtext" ng-show="showObject===1">
+        <div id="col">{{item.id}}</div>
+        <div id="col">{{item.code}}</div>
+        <div id="col">{{item.name}}</div>
+      </div>
+      <div id="itemtext" ng-show="showObject===2">
+        {{item.name}}
+      </div>
+    </div>
+  </vsscrollbar>
+
+  <hr/>
+
+  <div>
+    <div ng-include="'response.html'"></div>
+    <hr/>
+    <div id="clickedtext">{{clickedText}}</div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { OnChanges } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
 import { ChangeEvent } from '../virtual-scroll/virtual-scroll.component';
 
+
 @Component({
   selector: 'list-with-api',
   template: `
@@ -17,12 +18,14 @@ import { ChangeEvent } from '../virtual-scroll/virtual-scroll.component';
     <div>
     <button (click)="show = !show">{{show ? 'hide' : 'show'}}</button>
     show = {{show}}
+    <input [(ngModel)]="searchText" placeholder="search text goes here" (ngModelChange)="onChangeFilter()">
+    
     <div>
 
     <virtual-scroll
       *ngIf="show"
       [items]="buffer"
-      (update)="scrollItems = $event"
+      (update)="scrollItems =   $event"
       (end)="fetchMore($event)">
 
       
@@ -45,6 +48,7 @@ import { ChangeEvent } from '../virtual-scroll/virtual-scroll.component';
 })
 export class ListWithApiComponent implements OnChanges {
 
+  searchText:string;
   @Input()
   items: any[];
   scrollItems: any[];
@@ -56,6 +60,7 @@ export class ListWithApiComponent implements OnChanges {
   loading: boolean;
   show:boolean = false;
 
+  
   ngOnChanges(changes: SimpleChanges) {
     this.reset();
   }
@@ -85,5 +90,17 @@ export class ListWithApiComponent implements OnChanges {
         reject();
       }, 1000 + Math.random() * 1000);
     });
+  }
+
+  onChangeFilter(){
+    this.buffer = this.items.filter((singleItem) =>{
+
+      if(this.searchText === ''){
+        return this.items;
+      }
+      return singleItem['address'].toLowerCase().
+      includes(this.searchText.toLowerCase());
+    }); 
+    console.log(this.items);
   }
 }

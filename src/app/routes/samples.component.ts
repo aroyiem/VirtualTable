@@ -10,6 +10,8 @@ import { OnInit } from '@angular/core';
 export class SamplesComponent implements OnInit {
 
   items: ListItem[];
+  tableItems : any[];
+  chars = "ABCDEFGHIJKLMNOPQURSTUVWXYZ";
 
   constructor(private http: Http) { }
 
@@ -17,5 +19,8 @@ export class SamplesComponent implements OnInit {
     this.http.get('assets/data/items.json')
       .map(response => response.json())
       .subscribe(data => this.items = data);
+
+      
+      
   }
 }
