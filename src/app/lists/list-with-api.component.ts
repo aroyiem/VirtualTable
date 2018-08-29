@@ -37,6 +37,7 @@ import { ChangeEvent } from '../virtual-scroll/virtual-scroll.component';
 			  <td>{{item.gender}}</td>
 			  <td>{{item.age}}</td>
 			  <td>{{item.address}}</td>
+			  <td><input type="checkbox" [checked]="checkBoxClick()" (change)="checkBoxClickChange($event)"/></td>
 			</tr>
 		  </tbody>
       </table>
@@ -71,7 +72,7 @@ export class ListWithApiComponent implements OnChanges {
 
   fetchMore(event: ChangeEvent) {
     this.indices = event;
-    if (event.end === this.buffer.length - 1) {
+    if (this.buffer.length > this.bufferSize && event.end === this.buffer.length - 1) {
       this.loading = true;
       this.fetchNextChunk(this.buffer.length, this.bufferSize, event).then(chunk => {
         this.buffer = this.buffer.concat(chunk);
@@ -102,5 +103,13 @@ export class ListWithApiComponent implements OnChanges {
       includes(this.searchText.toLowerCase());
     }); 
     console.log(this.items);
+  
+  
+  checkBoxClick(){
+    console.log('click event');
+  }
+
+  checkBoxClickChange($event){
+    console.log($event);
   }
 }
